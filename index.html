@@ -7,16 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/icons/fav.png">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/ee3e8b37d4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ee3e8b37d4.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+  
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -31,48 +43,48 @@
     <div id=wrapper>
 
         <nav>
-            <div id=logo></div>
+            <a href="#">
+                <div id=logo></div>
+            </a>
         </nav>
 
-        <section id="upperSection">
+        <section id="upper-section">
 
             <div id="calculator">
-                <input type="text" id="to-convert">
-                <span id="equals">=</span>
-                <div id="converted">100.58</div>
+                <input type="text" id="to-convert" value="1">
+                <span>=</span>
+                <div id="converted"></div>
             </div>
 
             <div id="currency">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bitcoin (BTC)
-                    </button>
-                    <div class="dropdown-menu">
-                        <h6 class="dropdown-header">Crypto Currencies</h6>
-                        <a class="dropdown-item" href="#">Bitcoin (BTC)</a>
-                        <a class="dropdown-item" href="#">Ethereum (ETH)</a>
-                    </div>
-                </div>
-                <button class="btn btn-secondary" onclick="this.blur();"><i class="fas fa-exchange-alt"></i></button>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        US Dollar (USD)
-                    </button>
-                    <div class="dropdown-menu">
-                        <h6 class="dropdown-header">Fiat Currencies</h6>
-                        <a class="dropdown-item" href="#">US Dollar (USD)</a>
-                        <a class="dropdown-item" href="#">Euro (EUR)</a>
-                    </div>
-                </div>
+                <select class="selectpicker" data-live-search="true">
+                    <option data-tokens="BTC">Bitcoin (BTC)</option>
+                    <option data-tokens="">Ethereum (ETH)</option>
+                </select>
+
+                <button class="btn btn-secondary btn-light" onclick="this.blur();"><i class="fas fa-exchange-alt"></i></button>
+
+                <select class="selectpicker" data-live-search="true">
+                    <option data-tokens="USD">US Dollar (USD)</option>
+                    <option data-tokens="EUR">Euro (EUR)</option>
+                </select>
+
             </div>
 
-    </div>
+            <div id=value>
+                CURRENT BTC PRICE: <span id="btc-price"></span>
+                <span id="updated">updated <span id=update-sec></span> seconds ago</span>
+            </div>
 
-    </section>
+
+        </section>
+
 
     </div> <!-- wrapper -->
+    <footer>
+        &copy; Copyright 2019-2020. All Rights Reserved.
+    </footer>
 </body>
+
 
 </html>
