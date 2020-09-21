@@ -7,10 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/icons/fav.png">
 
-    <script
-    src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
@@ -25,7 +23,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/scripts.js"></script>
 
-  
+
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
@@ -51,29 +49,30 @@
         <section id="upper-section">
 
             <div id="calculator">
-                <input type="text" id="to-convert" value="1">
-                <span>=</span>
+                <input type="text" id="to-convert" value="1" oninput="Calculate()">
+                <span> = </span>
                 <div id="converted"></div>
             </div>
 
             <div id="currency">
-                <select class="selectpicker" data-live-search="true">
-                    <option data-tokens="BTC">Bitcoin (BTC)</option>
-                    <option data-tokens="">Ethereum (ETH)</option>
+                <select class="selectpicker" data-live-search="true" id="crypto-currencies" oninput="Calculate()">
+                    <option value="BTC" data-tokens="BTC">Bitcoin (BTC)</option>
+                    <option value="ETH" data-tokens="ETH">Ethereum (ETH)</option>
                 </select>
 
-                <button class="btn btn-secondary btn-light" onclick="this.blur();"><i class="fas fa-exchange-alt"></i></button>
+                <button class="btn btn-secondary btn-light" onclick="this.blur();"><i
+                        class="fas fa-exchange-alt"></i></button>
 
-                <select class="selectpicker" data-live-search="true">
-                    <option data-tokens="USD">US Dollar (USD)</option>
-                    <option data-tokens="EUR">Euro (EUR)</option>
+                <select class="selectpicker" data-live-search="true" id="fiat-currencies" oninput="Calculate()">
+                    <option value="USD" data-tokens="USD" >US Dollar (USD)</option>
+                    <option value="EUR" data-tokens="EUR">Euro (EUR)</option>
                 </select>
 
             </div>
 
             <div id=value>
-                CURRENT BTC PRICE: <span id="btc-price"></span>
-                <span id="updated">updated <span id=update-sec></span> seconds ago</span>
+                <div id="btc-price"></div>
+                <div id="updated">-</div>
             </div>
 
 
