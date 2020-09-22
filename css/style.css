@@ -70,6 +70,7 @@ body{
                     text-align: center;
                     width: 220px;
                     height: 50px;
+                    z-index: 99;
                 }
                 #converted{
                     width: 220px;
@@ -78,7 +79,15 @@ body{
                     vertical-align: middle;
                     text-align: center;
                     float: right;
-
+                }
+                #calculator span{
+                    position: absolute;
+                    text-align: center;
+                    left:0;
+                    right:0;
+                    margin-left:auto;
+                    margin-right:auto;
+                    font-weight: bold;
                 }
 
             #currency{
@@ -87,6 +96,7 @@ body{
                 justify-content: space-between;
                 width: 100%;
             }
+
 
             #value{
                 position: absolute;
@@ -108,12 +118,12 @@ body{
 
     footer{
         width: 100%;
-        height: 16px;
-        line-height: 16px;
+        height: 20px;
+        line-height: 20px;
         background-color: #202020;
         text-align: center;
         position: absolute;
         bottom: 0;
         color: #707070;
-        font-size: 10px;
+        font-size: 12px;
     }
