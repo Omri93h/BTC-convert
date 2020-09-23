@@ -1,4 +1,4 @@
-var btc_price, api_data;
+var swapped = false
 
 var usd_to_eur = {
 	"async": true,
@@ -21,65 +21,92 @@ var crypto_settings = {
 	}
 }
 
-function makeReadableFloat(val) {
-	return (Number(parseFloat(val).toFixed(3)).toLocaleString());
-}
+var rates = {
+	"CRYPTO": { "BTC": null, "ETH": null },
+	"FIAT": { "USD": 1, "EUR": null }
+};
 
+function makeReadableFloat(val,after_float) {
+	return (Number(parseFloat(val).toFixed(after_float))).toLocaleString(
+		undefined,{'maximumFractionDigits':8});
+}
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function Calculate() {
-	var base_coin = $('#crypto-currencies option:selected').val();
-	var convert_coin = $('#fiat-currencies option:selected').val();
+	let final_val,
+		base_coin = $('#crypto-currencies option:selected').val(),
+		convert_coin = $('#fiat-currencies option:selected').val(),
+		value_to_convert = $("#to-convert").val();
 
-	console.log(btc_price);
-	var value_to_convert = $("#to-convert").val();
+
+	if (!swapped) {
+		final_val = rates["FIAT"][convert_coin] * rates["CRYPTO"][base_coin] * value_to_convert;
+	}
+	else {
+		final_val = value_to_convert / rates["CRYPTO"][base_coin] / rates["FIAT"][convert_coin];
+	}
+	var after_dot = 3;
+	if (final_val < 1){
+		after_dot = 5
+	}
 
 
-	var final_val = value_to_convert * btc_price;
 	$("#converted").css("display", "none");
 	$("#converted").css("color", "#303030");
-	$("#converted").html(makeReadableFloat(final_val)).fadeIn(200);
+	$("#converted").html(makeReadableFloat(final_val, after_dot)).fadeIn(180);
 }
 
 async function updateValues() {
 	while (true) {
-		var i = 0;
+		$.ajax(usd_to_eur).done(function (response) {
+			function getFiatRates() {
+				rates["FIAT"]["EUR"] = response;
+			}
+			getFiatRates()
+		});
 		$.ajax(crypto_settings).done(function (response) {
-			function getBTC() {
-				btc_price = response[0]["quotes"]["USD"]["price"];
-				return btc_price;
+			function getCryptoRates() {
+				rates["CRYPTO"]["BTC"] = response[0]["quotes"]["USD"]["price"];
+				rates["CRYPTO"]["ETH"] = response[3]["quotes"]["USD"]["price"];
 			};
-			btc_price = getBTC();
-			$("#btc-price").css("display", "none");
-			$("#btc-price").html("1 BTC Value: " + makeReadableFloat(btc_price) + "$").fadeIn(300);
+			getCryptoRates();
 			Calculate();
+
+			$("#btc-price").css("display", "none");
+			$("#btc-price").html("1 BTC = <b>" +
+				makeReadableFloat(rates["CRYPTO"]["BTC"], 3) + "</b>$").fadeIn(180);
 		});
 
-		while (i < 10) {
+		for (let i = 0; i < 10; i++) {
 			await sleep(1 * 1000);
 			if (i != 0) {
 				$("#updated").html("Auto Update In " + (10 - i) + " ...");
 			}
-			i++;
 		}
-
 	}
 }
-updateValues();
 
 
+$(document).ready(function () {
 
+	$("#crypto-currencies").change(function () {
+		Calculate();
+	});
 
+	$("#fiat-currencies").change(function () {
+		Calculate();
+	});
 
+	$("#swap-button").click(function (a, b) {
+		a = $(".dropdown")[0];
+		a.before($(".dropdown")[1]);
+		a.before(this);
+		swapped = !swapped;
+		Calculate();
+	})
 
-// 	console.log("CHECKKKKKKKKKKKKKKKKKKKK");
-// });
-
-
-
-
-
-
+	updateValues();
+})

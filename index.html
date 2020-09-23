@@ -56,15 +56,16 @@
 
             <div id="currency">
                 <select class="selectpicker" data-live-search="true" id="crypto-currencies" oninput="Calculate()">
-                    <option value="BTC" data-tokens="BTC">Bitcoin (BTC)</option>
-                    <option value="ETH" data-tokens="ETH">Ethereum (ETH)</option>
+                    <option value="BTC" data-tokens="BTC" selected>Bitcoin (BTC)</option>
+                    <option value="ETH" data-tokens="ETH" >Ethereum (ETH)</option>
                 </select>
 
-                <button class="btn btn-secondary btn-light" onclick="this.blur();"><i
-                        class="fas fa-exchange-alt"></i></button>
+                <button class="btn btn-secondary btn-light" id="swap-button">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
 
                 <select class="selectpicker" data-live-search="true" id="fiat-currencies" oninput="Calculate()">
-                    <option value="USD" data-tokens="USD" >US Dollar (USD)</option>
+                    <option value="USD" data-tokens="USD" selected>US Dollar (USD)</option>
                     <option value="EUR" data-tokens="EUR">Euro (EUR)</option>
                 </select>
 

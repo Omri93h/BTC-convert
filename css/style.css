@@ -79,6 +79,7 @@ body{
                     vertical-align: middle;
                     text-align: center;
                     float: right;
+                    font-weight: bold;
                 }
                 #calculator span{
                     position: absolute;
